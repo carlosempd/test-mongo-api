@@ -11,15 +11,13 @@ export class UsersController {
 
     @Get()
     findAll() {
-        return this.userService.findAll()
+        return this.userService.findAll();
     }
 
     @UsePipes(new ValidationPipe())
     @FormDataRequest()
     @Post()
     create(@Body() body: CreateUserDto) {
-        console.log('body', body);
-        
         return this.userService.create(body);
     }
 
