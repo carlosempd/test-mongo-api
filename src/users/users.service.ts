@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Query } from 'mongoose';
 import { CreateUserDto } from 'src/core/dto/createUser.dto';
@@ -29,5 +29,22 @@ export class UsersService {
 
 
         return user.populate('profilePhoto');
+    }
+
+    async update(id: string, body: any) {
+        const user = await this.userModel.findById(id)
+        if (!user) {
+            throw new BadRequestException({
+                message: 'User doesn\'t exist'
+            });
+        }
+
+        Object.assign(user, body);
+        if (body.profilePhoto) {
+            const media = await this.mediaService.create(body.profilePhoto);
+            user.profilePhoto = media;
+        }
+        
+        return user.save();
     }
 }

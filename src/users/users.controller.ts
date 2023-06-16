@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post, Req, UploadedFile, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Req, UploadedFile, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from 'src/core/dto/createUser.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FormDataRequest } from 'nestjs-form-data';
+import { UpdateUserDto } from 'src/core/dto/updateUser.dto';
 
 @Controller('users')
 export class UsersController {
@@ -22,10 +23,13 @@ export class UsersController {
         return this.userService.create(body);
     }
 
-    @UseInterceptors(FileInterceptor('file'))
-    @Post('upload')
-    uploadProfilePhoto(@UploadedFile() file: Express.Multer.File) {
-        console.log(file);
-        
+
+    @Put(':id')
+    @FormDataRequest()
+    update(
+        @Param('id') id: string, 
+        @Body() updateUserDto: UpdateUserDto
+    ) {
+        return this.userService.update(id, updateUserDto);
     }
 }
