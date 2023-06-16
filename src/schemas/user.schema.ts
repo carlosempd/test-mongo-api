@@ -19,6 +19,9 @@ export class User {
   @Prop()
   address: string;
 
+  @Prop({ select: false })
+  password: string;
+
   @Prop({
     type: [{
       type: mongoose.Schema.Types.ObjectId,
