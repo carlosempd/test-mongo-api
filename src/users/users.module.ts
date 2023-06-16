@@ -18,6 +18,7 @@ import { MediaModule } from 'src/media/media.module';
     ]),
     NestjsFormDataModule.config({ storage: MemoryStoredFile }),
     MediaModule
-  ]
+  ],
+  exports: [UsersService]
 })
 export class UsersModule {}
