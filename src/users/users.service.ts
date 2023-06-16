@@ -16,6 +16,10 @@ export class UsersService {
         return this.userModel.find();
     }
 
+    findById(id: string) {
+        return this.userModel.findById(id);
+    }
+
     async create(body: CreateUserDto) {
         const media = await this.mediaService.create(body.profilePhoto);
 
@@ -32,7 +36,7 @@ export class UsersService {
     }
 
     async update(id: string, body: any) {
-        const user = await this.userModel.findById(id)
+        const user = await this.findById(id);
         if (!user) {
             throw new BadRequestException({
                 message: 'User doesn\'t exist'
