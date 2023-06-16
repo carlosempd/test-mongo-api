@@ -3,6 +3,8 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/schemas/user.schema';
+import { MemoryStoredFile, NestjsFormDataModule } from 'nestjs-form-data';
+import { MediaModule } from 'src/media/media.module';
 
 @Module({
   providers: [UsersService],
@@ -13,7 +15,9 @@ import { User, UserSchema } from 'src/schemas/user.schema';
         name: User.name,
         schema: UserSchema
       }
-    ])
+    ]),
+    NestjsFormDataModule.config({ storage: MemoryStoredFile }),
+    MediaModule
   ]
 })
 export class UsersModule {}
