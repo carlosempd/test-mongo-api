@@ -20,6 +20,10 @@ export class UsersService {
         return this.userModel.findById(id);
     }
 
+    findByUsername(username:string) {
+        return this.userModel.findOne({ username })
+    }
+
     async create(body: CreateUserDto) {
         const media = await this.mediaService.create(body.profilePhoto);
 
