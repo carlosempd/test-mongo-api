@@ -4,12 +4,15 @@ import { Model, Query } from 'mongoose';
 import { CreateUserDto } from 'src/core/dto/createUser.dto';
 import { MediaService } from 'src/media/media.service';
 import { User } from 'src/schemas/user.schema';
+import * as bcrypt from 'bcrypt';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UsersService {
     constructor(
         @InjectModel(User.name) private userModel: Model<User>,
-        private mediaService: MediaService
+        private mediaService: MediaService,
+        private configService: ConfigService
     ) {}
 
     findAll() {
@@ -26,6 +29,10 @@ export class UsersService {
 
     async create(body: CreateUserDto) {
         const media = await this.mediaService.create(body.profilePhoto);
+        const hashedPassword = await bcrypt.hash(
+            body.password,
+            +this.configService.get<number>('salt.rounds')
+        );
 
         const user = await this.userModel.create({
             firstname: body.firstname,
@@ -33,10 +40,26 @@ export class UsersService {
             username: body.username,
             address: body.address,
             profilePhoto: media,
+            password: hashedPassword,
         });
 
+        const {
+            _id,
+            username,
+            firstname,
+            lastname,
+            address,
+            profilePhoto
+        } = await user.populate('profilePhoto');
 
-        return user.populate('profilePhoto');
+        return  {
+            _id,
+            username,
+            firstname,
+            lastname,
+            address,
+            profilePhoto
+        };
     }
 
     async update(id: string, body: any) {
