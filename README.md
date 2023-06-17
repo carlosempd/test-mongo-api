@@ -12,12 +12,6 @@ All the code and functionality exist in the develop branch, so be sure to checko
 This app uses docker containers, so make sure to run the docker daemon.
 
 ## Clone the repo
-```bash
-$ npm install
-```
-
-
-## Installation
 
 ```bash
 $ git clone https://github.com/carlosempd/test-mongo-api.git
