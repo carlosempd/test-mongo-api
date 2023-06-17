@@ -1,18 +1,21 @@
-import { Body, Controller, Get, Param, Post, Put, Req, UploadedFile, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Req, UploadedFile, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from 'src/core/dto/createUser.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FormDataRequest } from 'nestjs-form-data';
 import { UpdateUserDto } from 'src/core/dto/updateUser.dto';
+import { AuthGuard } from 'src/core/guards/auth.guard';
 
 @Controller('users')
 export class UsersController {
     constructor(private readonly userService: UsersService) {}
 
+    @UseGuards(AuthGuard)
     @Get()
     findAll() {
         return this.userService.findAll();
     }
+
 
     @UsePipes(new ValidationPipe())
     @FormDataRequest()
@@ -22,6 +25,7 @@ export class UsersController {
     }
 
 
+    @UseGuards(AuthGuard)
     @Put(':id')
     @FormDataRequest()
     update(
