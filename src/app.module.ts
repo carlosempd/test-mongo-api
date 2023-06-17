@@ -6,7 +6,7 @@ import { UsersModule } from './users/users.module';
 import { MediaModule } from './media/media.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
-import { jwtConfig } from './core/config/config';
+import { bcryptConfig, jwtConfig } from './core/config/config';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { jwtConfig } from './core/config/config';
     ConfigModule.forRoot({ 
       isGlobal: true,
       envFilePath: '.env',
-      load: [jwtConfig]
+      load: [jwtConfig, bcryptConfig]
     }),
     UsersModule,
     MediaModule,
