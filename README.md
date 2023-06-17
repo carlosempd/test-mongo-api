@@ -1,4 +1,4 @@
-
+# API built with NestJS, MongoDB and Mongoose
 
 ## Description
 
@@ -10,6 +10,16 @@ A Bearer token will be needed to list and update users.
 All the code and functionality exist in the develop branch, so be sure to checkout to that branch.
 
 This app uses docker containers, so make sure to run the docker daemon.
+
+After running the app, open the browser with **http://localhost:3000/api** and you will see the available endpoits documentation generated with Swagger.
+
+Here is a list of the endponts:
+| endpoint | method | descripción |
+| --- | --- | --- |
+| /users | GET | List all users (requires authentication header with 'Bearer token') |
+/users | POST | create a new user (if test from postman, use body as form-data, not as x-www-form-urlencoded) |
+/users/:id | PUT | Update user (if test from postman, use body as form-data, not as x-www-form-urlencoded). Requires authentication as the list users endpoint | 
+/auth/login | POST | Login with one of the creted users | 
 
 ## Clone the repo
 
@@ -39,7 +49,7 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
-
+```
 
 ## Test
 
