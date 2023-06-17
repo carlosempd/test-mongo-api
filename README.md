@@ -21,6 +21,11 @@ Here is a list of the endponts:
 /users/:id | PUT | Update user (if test from postman, use body as form-data, not as x-www-form-urlencoded). Requires authentication as the list users endpoint | 
 /auth/login | POST | Login with one of the creted users | 
 
+
+If you are using postman to test locally, [here](https://drive.google.com/file/d/10h6ep6gdAkHmWwLt0nhNrTyPlz28HbjJ/view?usp=sharing) is a collection with  all the endpoints configured.
+
+Make sure to create a user first, login (copy the token from the response) and configure an **authentication** header with: ```Bearer token```
+
 ## Clone the repo
 
 ```bash
