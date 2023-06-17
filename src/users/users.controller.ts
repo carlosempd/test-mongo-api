@@ -13,7 +13,15 @@ import { CreateUserDto } from 'src/core/dto/createUser.dto';
 import { FormDataRequest } from 'nestjs-form-data';
 import { UpdateUserDto } from 'src/core/dto/updateUser.dto';
 import { AuthGuard } from 'src/core/guards/auth.guard';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse, ApiUnprocessableEntityResponse } from '@nestjs/swagger';
+import { 
+    ApiBearerAuth, 
+    ApiBody, 
+    ApiConsumes, 
+    ApiCreatedResponse, 
+    ApiForbiddenResponse, 
+    ApiOkResponse, 
+    ApiTags, 
+    ApiUnprocessableEntityResponse } from '@nestjs/swagger';
 import { User } from 'src/schemas/user.schema';
 
 @ApiTags('Users')
