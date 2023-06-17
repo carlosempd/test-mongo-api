@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from 'src/schemas/user.schema';
 import { MemoryStoredFile, NestjsFormDataModule } from 'nestjs-form-data';
 import { MediaModule } from 'src/media/media.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   providers: [UsersService],
@@ -17,7 +18,8 @@ import { MediaModule } from 'src/media/media.module';
       }
     ]),
     NestjsFormDataModule.config({ storage: MemoryStoredFile }),
-    MediaModule
+    MediaModule,
+    JwtModule
   ],
   exports: [UsersService]
 })
