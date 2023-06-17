@@ -57,8 +57,7 @@ export class UsersService {
             username,
             firstname,
             lastname,
-            address,
-            profilePhoto
+            address
         };
     }
 
