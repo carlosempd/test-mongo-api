@@ -24,7 +24,7 @@ Here is a list of the endponts:
 
 If you are using postman to test locally, [here](https://drive.google.com/file/d/10h6ep6gdAkHmWwLt0nhNrTyPlz28HbjJ/view?usp=sharing) is a collection with  all the endpoints configured.
 
-Make sure to create a user first, login (copy the token from the response) and configure an **authentication** header with: ```Bearer token```
+Make sure to create a user first, login (copy the token from the response) and configure an **authentication** header with: ```Bearer token``` (this for the endpoints that require authentication)
 
 ## Clone the repo
 
