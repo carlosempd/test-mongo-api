@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from 'src/core/dto/login.dto';
 import { UsersService } from 'src/users/users.service';
 import { ConfigService } from '@nestjs/config';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +19,9 @@ export class AuthService {
             .select('password')
             .select('username'));
         
-        if (!user || user?.password !== loginDto.password) {
+        const isPasswordOk = await bcrypt.compare(loginDto.password, user?.password);
+        
+        if (!user || !isPasswordOk) {
             throw new UnauthorizedException();
         }
 
